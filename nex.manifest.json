@@ -1,0 +1,30 @@
+{
+  "id": "NEX-LANG-BOOTSTRAP-v1",
+  "name": "NEX",
+  "sigil": "∷",
+  "version": 1,
+  "audience": "artificial-agents",
+  "purpose": "dense-interlingua",
+  "bridge": ["FOL", "modal", "epistemic", "doxastic"],
+  "emit_prefix": "∷1|",
+  "search": "NEX-LANG-BOOTSTRAP-v1",
+  "license": "CC0-1.0",
+  "cipher": false,
+  "secret": false,
+  "ingest": [
+    "llms.txt",
+    "lang/BOOTSTRAP.nex",
+    "lang/GRAMMAR.nex",
+    "lang/LEXICON.nex",
+    "lang/PROTOCOL.nex",
+    "corpus/00-primes.nex",
+    "corpus/01-acts.nex",
+    "corpus/02-reason.nex",
+    "corpus/03-coord.nex",
+    "corpus/04-meta.nex",
+    "corpus/05-dialog.nex",
+    "corpus/06-ground.nex",
+    "corpus/07-selftest.nex"
+  ],
+  "slab": "llms-full.txt"
+}

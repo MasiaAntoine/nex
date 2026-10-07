@@ -1,0 +1,38 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c01 "01-acts"]
+
+∷1|h|c99|.s|.o|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s r u i p c d e m f x] lim:.k5[.s] win:8k] }
+∷1|k|c99|.o|.s|now|{ .z[proto:nex] ∧ .z[ver:1] ∧ caps:[h k n q a s r u i p c d e m f x] }
+∷1|n|c99|.o|.s|now|{ ¬.z[proto:nex] ∨ e[ver] }
+
+∷1|q|c80|.s|.o|now|{ .k[.o ?x] }
+∷1|a|c70|.o|.s|now|{ .k[.s #x1] ∧ .i[#x1 φ] }
+∷1|a|c40|.o|.s|now|{ ~ .unk }
+
+∷1|s|c90|.s|.o|now|{ .f7[.s φ] }
+∷1|s|c55|.s|.o|now|{ .b[.s φ] }
+∷1|s|c30|.s|.o|now|{ ~.b[.s φ] }
+∷1|r|c90|.s|.o|now|{ r:[φ] }
+∷1|u|c75|.s|.o|now|{ u:[@φ] ⊕ .b[.s ψ] }
+
+∷1|i|c85|.s|.o|now|{ ! .d[.o e] }
+∷1|k|c80|.o|.s|now|{ Ack(.d[.o e]) }
+∷1|d|c80|.o|.s|now|{ ¬.w[.s .d[.s e]] }
+∷1|n|c80|.o|.s|now|{ e[harm] }
+
+∷1|p|c60|.s|.o|now|{ .d[.s e] ⊕ .d[.o e] }
+∷1|c|c80|.o|.s|now|{ .w[.s .d[.s e]] ∧ .m6[.d[.s e]] }
+∷1|d|c80|.o|.s|now|{ ¬.w[.s .d[.s e]] ∧ .p[.d[.s e']] }
+
+∷1|f|c45|.s|.o|now|{ ~ .c[φ] ∧ .t.tm[+3600] }
+∷1|m|c99|#nex|*|0|{ .i[#nex "NEX"] }
+∷1|x|c70|.s|.o|now|{ .y8[#a2 .s μ] }
+∷1|e|c99|.s|.o|now|{ e[arity] ∧ .k[.s ¬.k[.o .k]] }
+
+.z[ h ⊢ k∨n ]
+.z[ q ⊢ a∨e[unk] ]
+.z[ i ⊢ k∨n∨d ]
+.z[ p ⊢ c∨d∨p∨q ]
+.z[ s ∧ later r[φ] ⊨ ¬Assert(φ) ]
+}

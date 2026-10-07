@@ -1,0 +1,33 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c03 "03-coord"]
+
+.z[ coord ≡ .y[.a .a] ∧ .p[.d[.a e]] ∧ .r[#a1 #a2 #ρ.algn] ]
+.z[ ¬coord ≡ .r[#a1 #a2 #ρ.conf] ]
+.z[ align ⊨ .w[.s e] ∧ .w[.o e] ]
+.z[ split ⊨ .w[.s e] ∧ .w[.o ¬e] ]
+
+∷1|h|c99|.a#a1|.a#a2|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s p c d] lim:.k5[.s]] }
+∷1|k|c99|.a#a2|.a#a1|now|{ .z[proto:nex] }
+
+∷1|q|c80|.a#a1|.a#a2|now|{ .w[.o ?e] ∧ .r[?e #task #ρ.isa] }
+∷1|a|c70|.a#a2|.a#a1|now|{ .w[.s #e1] ∧ .i[#e1 .d[.s θ]] ∧ .k5[.s] }
+
+∷1|p|c65|.a#a1|.a#a2|now|{ .j[ .d[.s #e1] .d[.o #e2] ] ∧ .r[#e1 #e2 #ρ.aft] }
+∷1|c|c80|.a#a2|.a#a1|now|{ .w[.s .d[.s #e2]] ∧ .m6[.d[.s #e2]] }
+∷1|s|c75|.a#a1|.a#a2|+10|{ .d[.s #e1] ∧ .f7[.s .d[.s #e1]] }
+∷1|s|c75|.a#a2|.a#a1|+20|{ .d[.s #e2] ∧ .f7[.s .d[.s #e2]] }
+
+∷1|p|c60|.a#a1|.a#a2|now|{ .d[.o #e3] }
+∷1|d|c80|.a#a2|.a#a1|now|{ ¬.w[.s .d[.s #e3]] ∵ .r[#e3 .lim #ρ.need] }
+∷1|p|c60|.a#a2|.a#a1|now|{ .d[.s #e3b] ∥ .d[.a#a3 #e3] }
+
+∷1|q|c75|.a#a1|*|now|{ ∃x. .r[x #ρ.cap #e4] ∧ .w[.s .d[x #e4]] }
+∷1|a|c70|.a#a2|.a#a1|now|{ .r[.s #ρ.cap #e4] ∧ .p[.d[.s #e4]] }
+∷1|a|c70|.a#a3|.a#a1|now|{ ¬.r[.s #ρ.cap #e4] }
+
+.k3so[.r[#e1 #e2 #ρ.aft]] ∴ .p[.j[#e1 #e2]]
+.w[.s e] ∧ .w[.o e] ∴ .r[#s #o #ρ.algn]
+.w[.s e] ∧ .w[.o ¬e] ∴ .r[#s #o #ρ.conf]
+.r[#s #o #ρ.conf] ⊢ p[e'] ∨ q[?e] ∨ d
+}

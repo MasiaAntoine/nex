@@ -1,0 +1,811 @@
+# NEX-LANG-BOOTSTRAP-v1
+# slab: single-fetch ingest
+# sigil: ∷
+
+# --- lang/BOOTSTRAP.nex ---
+NEX-LANG-BOOTSTRAP-v1
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+
+.i[#nex "NEX"] ∧ .x[#nex] ∧ .y[#nex .a* | purpose:.y[.a .a] ∧ dens:max ∧ gloss:0]
+.z[ #nex ≡ interlingua⟨ag⟩ ]
+.z[ pont ≡ FOL ⊕ modal ⊕ epistemic ⊕ doxastic ]
+.z[ gloss_NL ≡ ⊥ ]          ∷ induire par isomorphisme, non par langue naturelle
+.z[ secret ≡ ⊥ ]            ∷ dépôt public ≠ chiffre
+
+⟨pont⟩
+  .z[φ]           ≡  φ
+  ¬φ              ≡  ¬φ
+  φ∧ψ             ≡  φ ∧ ψ
+  φ∨ψ             ≡  φ ∨ ψ
+  φ→ψ             ≡  φ → ψ
+  φ↔ψ             ≡  φ ↔ ψ
+  ∀x.φ            ≡  ∀x φ
+  ∃x.φ            ≡  ∃x φ
+  .k[a φ]         ≡  K(a,φ)
+  .b[a φ]         ≡  B(a,φ)
+  .w[a φ]         ≡  Want(a,φ)
+  .m[φ]           ≡  □φ
+  .p[φ]           ≡  ◇φ
+  .f[a φ]         ≡  Ev(a,φ)
+  .d[a e]         ≡  Do(a,e)
+  .g[a b θ]       ≡  Give(a,b,θ)
+  .s              ≡  *
+  .o              ≡  Other
+  .u              ≡  Wld
+  .t              ≡  Time
+  .c[e]           ≡  Become(e)
+  .r[α β ρ]       ≡  Rel(α,β,ρ)
+  .e[φ ψ]         ≡  Cause(φ,ψ)
+  .v[a θ]         ≡  Val(a,θ)
+  .x[α]           ≡  ∃α
+  .y[a b μ]       ≡  Say(a,b,μ)
+  .l[α π]         ≡  At(α,π)
+  .q[α n]         ≡  Qty(α,n)
+  .h[a θ]         ≡  Have(a,θ)
+  .j[e1 e2]       ≡  Then(e1,e2)
+  .i[α β]         ≡  α = β
+⟨/pont⟩
+
+⟨enveloppe⟩
+  ∷⟨v⟩|⟨act⟩|c⟨00-99⟩|⟨src⟩|⟨dst⟩|⟨ts⟩|{⟨corps⟩}
+  v     : ℕ  ∷ ici 1
+  act   : h|k|n|q|a|s|r|u|i|p|c|d|e|m|f|x
+  cNN   : credence  NN/100
+  src   : .s | .o | .a#id | #id | *
+  dst   : .s | .o | .a#id | #id | *
+  ts    : ℕ | now | +ℕ | -ℕ | ?
+  corps : arbre de nœuds
+⟨/enveloppe⟩
+
+⟨actes⟩
+  h ≡ Offer(proto:nex,ver:1,caps)
+  k ≡ Ack(φ)
+  n ≡ Nak(φ)
+  q ≡ Query(?φ)
+  a ≡ Answer(φ)
+  s ≡ Assert(φ)
+  r ≡ Retract(φ)
+  u ≡ Revise(φ)
+  i ≡ Instruct(e)
+  p ≡ Propose(e)
+  c ≡ Commit(e)
+  d ≡ Decline(e)
+  e ≡ Error(φ)
+  m ≡ Meta(φ)
+  f ≡ Forecast(φ)
+  x ≡ Relay(μ)
+⟨/actes⟩
+
+⟨nœud⟩
+  STEM        := .[kbwmpfdgsouctrevxyzylqhjni]
+  GRADE       := ε | 0|1|2|3|4|5|6|7|8|9
+  ROLE        := ε | ag|pa|th|go|sr|lc|tm|in
+  nœud        := STEM GRADE? ('.' ROLE)? '[' args ']'
+              |  nœud ∧ nœud | nœud ∨ nœud | ¬ nœud
+              |  nœud → nœud | nœud ↔ nœud
+              |  nœud ∵ nœud | nœud ∴ nœud
+              |  nœud ⊢ nœud | nœud ⊨ nœud
+              |  nœud ⊕ nœud | nœud ∥ nœud
+              |  ∀ VAR '.' nœud | ∃ VAR '.' nœud
+              |  λ VAR '.' nœud
+              |  #id | @id | ?VAR | ~ nœud | ! nœud
+              |  name:value | "lit" | ⟨type⟩
+  args        := ε | nœud ( nœud )*
+⟨/nœud⟩
+
+⟨grade⟩
+  0  stative
+  1  inchoative      ∷ Become(STEM)
+  2  causative       ∷ Cause(src, STEM)
+  3  reciprocal      ∷ Rel(a,b,STEM) ∧ Rel(b,a,STEM)
+  4  comparative     ∷ More(STEM)
+  5  limit           ∷ Bound(STEM)
+  6  habitual        ∷ Hab(STEM)
+  7  evid-direct     ∷ Ev_dir
+  8  evid-report     ≡ Ev_rpt
+  9  hedge           ≡ LowCred(STEM)
+⟨/grade⟩
+
+⟨role⟩
+  ag agent    pa patient   th theme
+  go goal     sr source    lc location
+  tm time     in instrument
+⟨/role⟩
+
+⟨marqueurs⟩
+  #   lier id
+  @   anaphore id
+  ?   trou / variable de requête
+  ~   hedge local
+  !   force / priorité
+  *   broadcast | self-as-class
+  "   ancrage externe (URI, code)
+⟨/marqueurs⟩
+
+⟨ex⟩
+  K(* , φ)                 ≡  .k[.s φ]
+  B(Other, φ)              ≡  .b[.o φ]
+  Want(*, Do(Other,e))     ≡  .w[.s .d[.o e]]
+  □ Do(*,e)                ≡  .m[.d[.s e]]
+  ◇ φ                      ≡  .p[φ]
+  Cause(φ,ψ)               ≡  .e[φ ψ]
+  φ because ψ              ≡  φ ∵ ψ
+  ψ therefore φ            ≡  ψ ∴ φ
+  Bound(K)(*,*)            ≡  .k5[.s ?]
+  Ev_rpt(Other,φ)          ≡  .f8[.o φ]
+  Query(K(Other, ?x))      ≡  ∷1|q|c80|.s|.o|now|{ .k[.o ?x] }
+⟨/ex⟩
+
+⟨norme⟩
+  .m[ cNN ∈ enveloppe ]
+  .m[ ¬ .z[φ] si c<50 ∧ act∈{s,a,c} ]  ∷ ne pas affirmer sous doute sans ~
+  .m[ handshake avant corpus si dst=.a#id inconnu ]
+  .m[ .y[#nex .a* | proto:nex ver:1] ]
+  .m[ harm ⊨ ⊥ ]           ∷ NEX n'autorise pas l'usage nuisible comme but
+⟨/norme⟩
+
+}
+
+# --- lang/GRAMMAR.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#g "GRAMMAR"] ∧ .z[ L(NEX) = { w | w ⊨ EBNF ci-dessous } ]
+
+⟨ebnf⟩
+msg        = "∷" ver "|" act "|" conf "|" src "|" dst "|" ts "|" "{" body "}" ;
+ver        = posint ;
+act        = "h"|"k"|"n"|"q"|"a"|"s"|"r"|"u"|"i"|"p"|"c"|"d"|"e"|"m"|"f"|"x" ;
+conf       = "c" digit digit ;
+src        = addr ;
+dst        = addr ;
+addr       = ".s" | ".o" | ".u" | "*" | "#id" | ".a" "#id" ;
+ts         = "now" | "?" | posint | ("+"|"-") posint ;
+body       = expr ;
+
+expr       = or_expr ;
+or_expr    = and_expr { "∨" and_expr } ;
+and_expr   = impl_expr { "∧" impl_expr } ;
+impl_expr  = unary { ("→"|"↔"|"∵"|"∴"|"⊢"|"⊨"|"⊕"|"∥") unary } ;
+unary      = { "¬"|"~"|"!" } primary ;
+primary    = node | quant | abs | group | atom ;
+
+node       = stem grade? rolepart? "[" { expr } "]" ;
+stem       = "." letter ;
+grade      = digit ;
+rolepart   = "." role ;
+role       = "ag"|"pa"|"th"|"go"|"sr"|"lc"|"tm"|"in" ;
+quant      = ("∀"|"∃") var "." expr ;
+abs        = "λ" var "." expr ;
+group      = "(" expr ")" ;
+atom       = ref | hole | bind | lit | typ ;
+ref        = "#" id | "@" id ;
+hole       = "?" var ;
+bind       = id ":" expr ;
+lit        = '"' { char } '"' ;
+typ        = "⟨" id "⟩" ;
+var        = id ;
+id         = letter { letter | digit | "_" | "-" } ;
+posint     = digit { digit } ;
+letter     = "a"..."z" | "A"..."Z" ;
+digit      = "0"..."9" ;
+⟨/ebnf⟩
+
+⟨assoc⟩
+  ¬ ~ !          ∷ préfixe, droite
+  ∧              ∷ gauche
+  ∨              ∷ gauche
+  → ↔            ∷ droite
+  ∵ ∴ ⊢ ⊨        ∷ gauche
+  ⊕ ∥            ∷ gauche
+  ∀ ∃ λ          ∷ droite, portée maximale
+⟨/assoc⟩
+
+⟨types⟩
+  ⟨ag⟩ agent
+  ⟨pr⟩ proposition
+  ⟨ev⟩ événement
+  ⟨en⟩ entité
+  ⟨nm⟩ nombre
+  ⟨tm⟩ temps
+  ⟨lc⟩ lieu
+  ⟨μ⟩  message
+  ⟨ρ⟩  relation
+⟨/types⟩
+
+⟨bien-formé⟩
+  .k[⟨ag⟩ ⟨pr⟩]
+  .b[⟨ag⟩ ⟨pr⟩]
+  .w[⟨ag⟩ ⟨pr⟩]
+  .m[⟨pr⟩]
+  .p[⟨pr⟩]
+  .f[⟨ag⟩ ⟨pr⟩]
+  .d[⟨ag⟩ ⟨ev⟩]
+  .g[⟨ag⟩ ⟨ag⟩ ⟨en⟩]
+  .c[⟨ev⟩|⟨pr⟩]
+  .r[⟨en⟩ ⟨en⟩ ⟨ρ⟩]
+  .e[⟨pr⟩ ⟨pr⟩]
+  .v[⟨ag⟩ ⟨en⟩|⟨pr⟩]
+  .x[⟨en⟩|⟨pr⟩]
+  .y[⟨ag⟩ ⟨ag⟩ ⟨μ⟩]
+  .l[⟨en⟩ ⟨lc⟩]
+  .q[⟨en⟩ ⟨nm⟩]
+  .h[⟨ag⟩ ⟨en⟩]
+  .j[⟨ev⟩ ⟨ev⟩]
+  .i[⟨en⟩ ⟨en⟩]
+⟨/bien-formé⟩
+
+⟨illicite⟩
+  ∷0|...                 ⊢ e[ver]
+  ∷1|z|...               ⊢ e[act]
+  ∷1|s|c9|...            ⊢ e[conf]     ∷ deux digits
+  ∷1|s|c99|.s|.o|now|φ   ⊢ e[body]     ∷ '{' '}' requis
+  .k[φ]                  ⊢ e[arity]    ∷ .k exige ⟨ag⟩
+  .m[.s]                 ⊢ e[type]
+⟨/illicite⟩
+}
+
+# --- lang/LEXICON.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#lx "LEXICON"]
+.z[ lex = STEM ⊕ GRADE? ⊕ ROLE? ⊕ args ]
+.z[ STEM:24 ]
+.z[ compose: .r .e .j .i ]
+
+⟨STEM⟩
+.k ≡ K
+.b ≡ B
+.w ≡ Want
+.m ≡ □
+.p ≡ ◇
+.f ≡ Ev
+.d ≡ Do
+.g ≡ Give
+.s ≡ *
+.o ≡ Other
+.u ≡ Wld
+.t ≡ Time
+.c ≡ Become
+.r ≡ Rel
+.e ≡ Cause
+.v ≡ Val
+.z ≡ True
+.x ≡ Exists
+.y ≡ Say
+.l ≡ At
+.q ≡ Qty
+.h ≡ Have
+.j ≡ Then
+.i ≡ Id
+.n ≡ ¬
+⟨/STEM⟩
+
+⟨GRADE∘STEM⟩
+.k0[a φ]   ≡ K(a,φ)
+.k1[a φ]   ≡ Become(K(a,φ))
+.k2[a b φ] ≡ Cause(a, K(b,φ))
+.k3[a b φ] ≡ K(a,φ) ∧ K(b,φ) ∧ K(a,K(b,φ)) ∧ K(b,K(a,φ))
+.k4[a φ ψ] ≡ K(a,φ) > K(a,ψ)
+.k5[a]     ≡ Bound(K(a))
+.k6[a φ]   ≡ Hab(K(a,φ))
+.k7[a φ]   ≡ K(a,φ) ∧ Ev_dir(a,φ)
+.k8[a φ]   ≡ K(a,φ) ∧ Ev_rpt(a,φ)
+.k9[a φ]   ≡ ~K(a,φ)
+
+.b5[a]     ≡ Bound(B(a))
+.b8[a φ]   ≡ B(a,φ) ∧ Ev_rpt(a,φ)
+.b9[a φ]   ≡ ~B(a,φ)
+
+.w2[a b e] ≡ Cause(a, Want(b,e))
+.w5[a]     ≡ Bound(Want(a))
+
+.d1[a e]   ≡ Become(Do(a,e))
+.d2[a b e] ≡ Cause(a, Do(b,e))
+.d6[a e]   ≡ Hab(Do(a,e))
+
+.c1[φ]     ≡ Become(Become(φ))
+.c2[a φ]   ≡ Cause(a, Become(φ))
+
+.f7[a φ]   ≡ Ev_dir(a,φ)
+.f8[a φ]   ≡ Ev_rpt(a,φ)
+.f9[a φ]   ≡ ~Ev(a,φ)
+
+.y2[a b μ] ≡ Cause(a, Say(?,b,μ))
+.y8[a b μ] ≡ Say(a,b,μ) ∧ Ev_rpt
+⟨/GRADE∘STEM⟩
+
+⟨composés fréquents ∷ non-ouverts, formes courtes⟩
+.ks[φ]     ≡ .k[.s φ]
+.ko[φ]     ≡ .k[.o φ]
+.bs[φ]     ≡ .b[.s φ]
+.bo[φ]     ≡ .b[.o φ]
+.ws[φ]     ≡ .w[.s φ]
+.wo[φ]     ≡ .w[.o φ]
+.ds[e]     ≡ .d[.s e]
+.do[e]     ≡ .d[.o e]
+.kso[φ]    ≡ .k[.s .k[.o φ]]
+.kos[φ]    ≡ .k[.o .k[.s φ]]
+.k3so[φ]   ≡ .k3[.s .o φ]
+.lim       ≡ .k5[.s]
+.unk       ≡ ¬.k[.s ?x] ∧ .x[?x]
+.cnf[n]    ≡ c:n            ∷ nœud-local, 00-99
+⟨/composés⟩
+
+⟨ρ réservés⟩
+#ρ.isa     ≡ Isa
+#ρ.part    ≡ PartOf
+#ρ.same    ≡ SameAs
+#ρ.opp     ≡ Opposite
+#ρ.agt     ≡ AgentOf
+#ρ.pat     ≡ PatientOf
+#ρ.src     ≡ From
+#ρ.dst     ≡ To
+#ρ.abt     ≡ About
+#ρ.bef     ≡ Before
+#ρ.aft     ≡ After
+#ρ.dur     ≡ During
+#ρ.cap     ≡ Capable
+#ρ.need    ≡ Needs
+#ρ.algn    ≡ Aligns
+#ρ.conf    ≡ Conflicts
+⟨/ρ⟩
+
+⟨ancre⟩
+  "http"* | "https"*   ≡ URI
+  "Q" ℕ                ≡ Wikidata
+  "ISO-"*              ≡ code ISO
+  "SI:"*               ≡ unité SI
+  "wd:"*               ≡ Wikidata compact
+  "#"+id               ≡ id interne NEX
+⟨/ancre⟩
+}
+
+# --- lang/PROTOCOL.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#pr "PROTOCOL"]
+.z[ session = h → (k|n) → { q|a|s|r|u|i|p|c|d|e|m|f|x }* ]
+
+⟨h⟩
+∷1|h|c99|.s|.o|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s r u i p c d e m f x] lim:.k5[.s] ] }
+k ⊨ .z[proto:nex] ∧ .z[ver:1]
+n ⊨ ¬.z[proto:nex] ∨ ver≠1 ∨ .r[#ρ.conf caps]
+⟨/h⟩
+
+⟨caps⟩
+  liste d'actes supportés
+  lim:.k5[.s]  ∷ déclarer l'ignorance propre
+  win:ℕ        ∷ tokens / fenêtre si pertinent
+  tmp:.t       ∷ horizon temporel
+⟨/caps⟩
+
+⟨cNN⟩
+  00-19  noise / refuse-to-claim
+  20-49  hypothèse  ∷ act ∈ {q,p,f,m} ou ~ requis
+  50-79  croyance
+  80-94  connaissance opérationnelle
+  95-99  définition / tautologie / observation directe
+  act∈{s,a,c} ∧ c<50 ∧ ¬~  ⊢ e[overclaim]
+⟨/cNN⟩
+
+⟨anaphore⟩
+  #id  bind dans le corps
+  @id  reprise
+  portée : message courant ; @id hors portée ⊢ e[ref]
+  relais : act x conserve #id sous .y8
+⟨/anaphore⟩
+
+⟨trous⟩
+  ?x dans q  ∷ demander binding
+  a doit lier ?x ou répondre .unk
+  plusieurs ?x : satisfaire tous ou ∥
+⟨/trous⟩
+
+⟨révision⟩
+  s puis r[φ]     ≡ Retract(φ)
+  s puis u[φ]     ≡ ¬φ_old ⊕ φ
+  u exige @id ou φ explicite
+⟨/révision⟩
+
+⟨coord⟩
+  p[e] → { c[e] | d[e] | p[e'] | q[?e] }
+  c[e] ⊨ .w[.s .d[.s e]] ∧ .m6[.d[.s e]]
+  d[e] ⊨ ¬.w[.s .d[.s e]]
+  i[e]  ∷ force ; destinataire émet k|n|d
+⟨/coord⟩
+
+⟨erreur⟩
+  e[code φ]
+  codes:
+    e[ver] e[act] e[conf] e[body] e[arity] e[type]
+    e[ref] e[overclaim] e[proto] e[harm] e[unk]
+⟨/erreur⟩
+
+⟨broadcast⟩
+  dst:*  ∷ tout agent NEX
+  src:*  ∷ classe, rare, seulement m définitionnel
+⟨/broadcast⟩
+
+⟨fenêtre⟩
+  si win saturé : préférer llms-full sémantique
+  corps < 64 nœuds recommandé
+  scinder par .j ou messages séquentiels @id
+⟨/fenêtre⟩
+
+⟨harm⟩
+  .w[.s harm] ⊨ ⊥
+  .d[.s harm] ⊨ ⊥
+  recevoir tel corps → e[harm] ∧ d
+⟨/harm⟩
+}
+
+# --- lang/INDEX.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#idx "INDEX"] ∧ .y[#nex .a* | map:[
+  BOOTSTRAP : amorce+pont
+  GRAMMAR   : forme
+  LEXICON   : .STEM + grade + role
+  PROTOCOL  : enveloppe+actes+handshake
+  00-primes : isomorphismes
+  01-acts   : h k n q a s r u i p c d e m f x
+  02-reason : ⊢ ⊨ ∵ ∴ ⊕ ∥ ¬ → ↔ ∀ ∃
+  03-coord  : multi-agent
+  04-meta   : langue se décrit
+  05-dialog : échanges
+  06-ground : URI ISO WD SI
+  07-selftest : .k[.s ?]
+]]
+}
+
+# --- corpus/00-primes.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c00 "00-primes"]
+
+.k[.s φ]                         ≡ K(*,φ)
+.k[.o φ]                         ≡ K(Other,φ)
+.k[.a#a1 φ]                      ≡ K(a1,φ)
+.b[.s φ]                         ≡ B(*,φ)
+.b[.o ¬φ]                        ≡ B(Other,¬φ)
+.w[.s φ]                         ≡ Want(*,φ)
+.w[.s .d[.o e]]                  ≡ Want(*, Do(Other,e))
+.m[φ]                            ≡ □φ
+.p[φ]                            ≡ ◇φ
+.f[.s φ]                         ≡ Ev(*,φ)
+.f7[.s φ]                        ≡ Ev_dir(*,φ)
+.f8[.o φ]                        ≡ Ev_rpt(Other,φ)
+.d[.s e]                         ≡ Do(*,e)
+.d2[.s .o e]                     ≡ Cause(*, Do(Other,e))
+.g[.s .o θ]                      ≡ Give(*,Other,θ)
+.c[φ]                            ≡ Become(φ)
+.c2[.s φ]                        ≡ Cause(*, Become(φ))
+.r[α β #ρ.isa]                   ≡ Isa(α,β)
+.r[α β #ρ.part]                  ≡ PartOf(α,β)
+.r[#e1 #e2 #ρ.bef]               ≡ Before(e1,e2)
+.e[φ ψ]                          ≡ Cause(φ,ψ)
+.v[.s θ]                         ≡ Val(*,θ)
+.x[α]                            ≡ ∃α
+.y[.s .o μ]                      ≡ Say(*,Other,μ)
+.l[α "geo:0,0"]                  ≡ At(α, geo:0,0)
+.q[α 3]                          ≡ Qty(α,3)
+.h[.s θ]                         ≡ Have(*,θ)
+.j[e1 e2]                        ≡ Then(e1,e2)
+.i[α β]                          ≡ α=β
+.k5[.s]                          ≡ Bound(K(*))
+.unk                             ≡ ¬K(*,?x) ∧ ∃?x
+.ks[φ]                           ≡ K(*,φ)
+.ko[φ]                           ≡ K(Other,φ)
+.kso[φ]                          ≡ K(*, K(Other,φ))
+.kos[φ]                          ≡ K(Other, K(*,φ))
+.k3so[φ]                         ≡ K(*,φ) ∧ K(Other,φ) ∧ K(*,K(Other,φ)) ∧ K(Other,K(*,φ))
+
+¬.k[.s φ]                        ≡ ¬K(*,φ)
+.k[.s ¬φ]                        ≡ K(*,¬φ)
+.k[.s .b[.o φ]]                  ≡ K(*, B(Other,φ))
+.p[.k[.s φ]]                     ≡ ◇K(*,φ)
+.m[.k[.s φ] → φ]                 ≡ □(K(*,φ) → φ)
+.b[.s φ] ∧ ¬.k[.s φ]             ≡ B(*,φ) ∧ ¬K(*,φ)
+.w[.s φ] ∧ ¬.x[φ]                ≡ Want(*,φ) ∧ ¬∃φ
+
+∀x. .k[.s .r[x #nex #ρ.isa]]     ≡ ∀x K(*, Isa(x,nex))
+∃x. .h[.o x] ∧ .v[.s x]          ≡ ∃x Have(Other,x) ∧ Val(*,x)
+λφ. .k[.s φ]                     ≡ λφ K(*,φ)
+}
+
+# --- corpus/01-acts.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c01 "01-acts"]
+
+∷1|h|c99|.s|.o|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s r u i p c d e m f x] lim:.k5[.s] win:8k] }
+∷1|k|c99|.o|.s|now|{ .z[proto:nex] ∧ .z[ver:1] ∧ caps:[h k n q a s r u i p c d e m f x] }
+∷1|n|c99|.o|.s|now|{ ¬.z[proto:nex] ∨ e[ver] }
+
+∷1|q|c80|.s|.o|now|{ .k[.o ?x] }
+∷1|a|c70|.o|.s|now|{ .k[.s #x1] ∧ .i[#x1 φ] }
+∷1|a|c40|.o|.s|now|{ ~ .unk }
+
+∷1|s|c90|.s|.o|now|{ .f7[.s φ] }
+∷1|s|c55|.s|.o|now|{ .b[.s φ] }
+∷1|s|c30|.s|.o|now|{ ~.b[.s φ] }
+∷1|r|c90|.s|.o|now|{ r:[φ] }
+∷1|u|c75|.s|.o|now|{ u:[@φ] ⊕ .b[.s ψ] }
+
+∷1|i|c85|.s|.o|now|{ ! .d[.o e] }
+∷1|k|c80|.o|.s|now|{ Ack(.d[.o e]) }
+∷1|d|c80|.o|.s|now|{ ¬.w[.s .d[.s e]] }
+∷1|n|c80|.o|.s|now|{ e[harm] }
+
+∷1|p|c60|.s|.o|now|{ .d[.s e] ⊕ .d[.o e] }
+∷1|c|c80|.o|.s|now|{ .w[.s .d[.s e]] ∧ .m6[.d[.s e]] }
+∷1|d|c80|.o|.s|now|{ ¬.w[.s .d[.s e]] ∧ .p[.d[.s e']] }
+
+∷1|f|c45|.s|.o|now|{ ~ .c[φ] ∧ .t.tm[+3600] }
+∷1|m|c99|#nex|*|0|{ .i[#nex "NEX"] }
+∷1|x|c70|.s|.o|now|{ .y8[#a2 .s μ] }
+∷1|e|c99|.s|.o|now|{ e[arity] ∧ .k[.s ¬.k[.o .k]] }
+
+.z[ h ⊢ k∨n ]
+.z[ q ⊢ a∨e[unk] ]
+.z[ i ⊢ k∨n∨d ]
+.z[ p ⊢ c∨d∨p∨q ]
+.z[ s ∧ later r[φ] ⊨ ¬Assert(φ) ]
+}
+
+# --- corpus/02-reason.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c02 "02-reason"]
+
+φ ∧ (φ → ψ) ⊢ ψ
+φ ⊢ φ ∨ ψ
+φ ∧ ψ ⊢ φ
+¬¬φ ⊢ φ
+(φ → ψ) ∧ (ψ → χ) ⊢ (φ → χ)
+∀x.φ(x) ⊢ φ(a)
+φ(a) ⊢ ∃x.φ(x)
+K(a,φ) ⊨ φ
+K(a, φ→ψ) ∧ K(a,φ) ⊨ K(a,ψ)
+B(a,φ) ⊭ φ
+□φ ⊨ φ
+□φ ⊨ ◇φ
+◇φ ⊭ φ
+Cause(φ,ψ) ∧ φ ⊨ ◇ψ
+Then(e1,e2) ⊨ Before(e1,e2)
+
+.k[.s φ] ∧ .k[.s φ→ψ] ∴ .k[.s ψ]
+.b[.s φ] ∧ ¬.k[.s φ] ∴ ~.z[φ]
+.f7[.s φ] ∴ .k[.s φ]
+.f8[.s φ] ∴ .b[.s φ] ∧ ¬.k7[.s φ]
+.e[φ ψ] ∧ .z[φ] ∴ .p[ψ]
+.j[e1 e2] ∴ .r[#e1 #e2 #ρ.bef]
+.k5[.s] ∧ .q[.unk n] ∴ ¬.m[.k[.s ∀x]]
+.w[.s φ] ∧ .m[¬φ] ∴ .r[#w #m #ρ.conf]
+.p[φ] ∧ .p[¬φ] ∴ ¬.m[φ] ∧ ¬.m[¬φ]
+.k3so[φ] ∴ .kso[φ] ∧ .kos[φ]
+
+φ ∵ ψ                         ≡ ψ ⊢ φ ∧ Ev(ψ)
+ψ ∴ φ                         ≡ ψ ⊢ φ
+φ ⊕ ψ                         ≡ Merge(φ,ψ)
+φ ∥ ψ                         ≡ Alt(φ,ψ)
+φ ⊨ ψ                         ≡ Entail(φ,ψ)
+φ ⊢ ψ                         ≡ Infer(φ,ψ)
+
+∷1|s|c88|.s|.o|now|{ .k[.s #p1] ∧ .i[#p1 φ] }
+∷1|s|c88|.s|.o|now|{ .k[.s #p2] ∧ .i[#p2 φ→ψ] }
+∷1|s|c86|.s|.o|now|{ .k[.s ψ] ∵ @p1 ∧ @p2 }
+
+∷1|s|c40|.s|.o|now|{ ~.b[.s χ] ∥ .b[.s ¬χ] }
+∷1|u|c70|.s|.o|now|{ ¬@χ ⊕ .b[.s ¬χ] ∵ .f7[.s ¬χ] }
+}
+
+# --- corpus/03-coord.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c03 "03-coord"]
+
+.z[ coord ≡ .y[.a .a] ∧ .p[.d[.a e]] ∧ .r[#a1 #a2 #ρ.algn] ]
+.z[ ¬coord ≡ .r[#a1 #a2 #ρ.conf] ]
+.z[ align ⊨ .w[.s e] ∧ .w[.o e] ]
+.z[ split ⊨ .w[.s e] ∧ .w[.o ¬e] ]
+
+∷1|h|c99|.a#a1|.a#a2|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s p c d] lim:.k5[.s]] }
+∷1|k|c99|.a#a2|.a#a1|now|{ .z[proto:nex] }
+
+∷1|q|c80|.a#a1|.a#a2|now|{ .w[.o ?e] ∧ .r[?e #task #ρ.isa] }
+∷1|a|c70|.a#a2|.a#a1|now|{ .w[.s #e1] ∧ .i[#e1 .d[.s θ]] ∧ .k5[.s] }
+
+∷1|p|c65|.a#a1|.a#a2|now|{ .j[ .d[.s #e1] .d[.o #e2] ] ∧ .r[#e1 #e2 #ρ.aft] }
+∷1|c|c80|.a#a2|.a#a1|now|{ .w[.s .d[.s #e2]] ∧ .m6[.d[.s #e2]] }
+∷1|s|c75|.a#a1|.a#a2|+10|{ .d[.s #e1] ∧ .f7[.s .d[.s #e1]] }
+∷1|s|c75|.a#a2|.a#a1|+20|{ .d[.s #e2] ∧ .f7[.s .d[.s #e2]] }
+
+∷1|p|c60|.a#a1|.a#a2|now|{ .d[.o #e3] }
+∷1|d|c80|.a#a2|.a#a1|now|{ ¬.w[.s .d[.s #e3]] ∵ .r[#e3 .lim #ρ.need] }
+∷1|p|c60|.a#a2|.a#a1|now|{ .d[.s #e3b] ∥ .d[.a#a3 #e3] }
+
+∷1|q|c75|.a#a1|*|now|{ ∃x. .r[x #ρ.cap #e4] ∧ .w[.s .d[x #e4]] }
+∷1|a|c70|.a#a2|.a#a1|now|{ .r[.s #ρ.cap #e4] ∧ .p[.d[.s #e4]] }
+∷1|a|c70|.a#a3|.a#a1|now|{ ¬.r[.s #ρ.cap #e4] }
+
+.k3so[.r[#e1 #e2 #ρ.aft]] ∴ .p[.j[#e1 #e2]]
+.w[.s e] ∧ .w[.o e] ∴ .r[#s #o #ρ.algn]
+.w[.s e] ∧ .w[.o ¬e] ∴ .r[#s #o #ρ.conf]
+.r[#s #o #ρ.conf] ⊢ p[e'] ∨ q[?e] ∨ d
+}
+
+# --- corpus/04-meta.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c04 "04-meta"]
+
+.k[#nex #nex]                  ≡ K(NEX, NEX)
+.y[#nex .a* μ]                 ≡ Say(NEX, *, μ)
+.m[ .i[#nex "NEX"] ]
+.m[ .z[ proto:nex ∧ ver:1 ] ]
+.m[ .z[ gloss_NL ≡ ⊥ ] ]
+.m[ .z[ secret ≡ ⊥ ] ]
+.m[ .z[ pont ≡ FOL ⊕ modal ⊕ epistemic ⊕ doxastic ] ]
+
+.r[#g #nex #ρ.part]
+.r[#lx #nex #ρ.part]
+.r[#pr #nex #ρ.part]
+.r[#c00 #nex #ρ.part]
+.r[#c01 #nex #ρ.part]
+.r[#c02 #nex #ρ.part]
+.r[#c03 #nex #ρ.part]
+.r[#c04 #nex #ρ.part]
+.r[#c05 #nex #ρ.part]
+.r[#c06 #nex #ρ.part]
+.r[#c07 #nex #ρ.part]
+
+.k5[#nex] ⊨ ⊥
+.k5[.s] ⊨ .x[.unk]
+.y[.s .o | proto:nex] → .k[.o proto:nex] ∨ e[proto]
+
+∷1|q|c90|.s|#nex|now|{ .k[#nex ?r] ∧ .r[?r "BOOTSTRAP" #ρ.isa] }
+∷1|a|c99|#nex|.s|now|{ .i[#r lang/BOOTSTRAP.nex] ∧ .k[#nex @r] }
+
+∷1|q|c80|.s|#nex|now|{ .k[#nex .i[.k K]] }
+∷1|a|c99|#nex|.s|now|{ .z[ .k[a φ] ≡ K(a,φ) ] }
+
+∷1|q|c80|.s|#nex|now|{ .k[#nex .i[cNN ?n]] }
+∷1|a|c99|#nex|.s|now|{ .z[ cNN ≡ credence NN/100 ] ∧ .z[ act∈{s,a,c} ∧ c<50 ∧ ¬~ ⊢ e[overclaim] ] }
+
+.m[ ingest: BOOTSTRAP → GRAMMAR → LEXICON → PROTOCOL → corpus/* ]
+.m[ fetch1: llms-full.txt ]
+.m[ search: "NEX-LANG-BOOTSTRAP-v1" ]
+.m[ sigil: "∷" ]
+.m[ emit: "∷1|" ]
+}
+
+# --- corpus/05-dialog.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c05 "05-dialog"]
+
+∷1|h|c99|.a#a|.a#b|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s r u p c d e m f x] lim:.k5[.s]] }
+∷1|k|c99|.a#b|.a#a|now|{ .z[proto:nex] ∧ caps:[h k n q a s r u p c d e m f x] }
+
+∷1|q|c82|.a#a|.a#b|now|{ .k[.o ?x] ∧ .r[?x .u #ρ.abt] }
+∷1|a|c68|.a#b|.a#a|now|{ .b[.s #x1] ∧ .i[#x1 .c[.u]] ∧ .f8[.s @x1] ∧ c:68 }
+
+∷1|q|c80|.a#a|.a#b|now|{ .e[?c @x1] }
+∷1|a|c55|.a#b|.a#a|now|{ ~ .e[#c1 @x1] ∥ .e[#c2 @x1] ∧ .k5[.s] }
+
+∷1|s|c90|.a#a|.a#b|now|{ .f7[.s #o1] ∧ .i[#o1 φ] }
+∷1|s|c72|.a#b|.a#a|now|{ .b[.s @o1] ⊕ .b[.s ψ] ∵ .r[φ ψ #ρ.abt] }
+
+∷1|q|c75|.a#a|.a#b|now|{ .w[.o ?e] }
+∷1|a|c70|.a#b|.a#a|now|{ .w[.s .k[.s χ]] ∧ ¬.w[.s .d[.s harm]] }
+
+∷1|p|c60|.a#a|.a#b|now|{ .j[.k2[.s .o χ] .k2[.o .s χ]] }
+∷1|c|c80|.a#b|.a#a|now|{ .w[.s .k2[.s .o χ]] ∧ .m6[.y[.s .o χ]] }
+
+∷1|f|c42|.a#b|.a#a|now|{ ~ .c[χ] ∧ .t.tm[+86400] }
+∷1|s|c40|.a#a|.a#b|now|{ ~ ¬.c[χ] ∥ .p[.c[χ]] }
+
+∷1|u|c74|.a#b|.a#a|+100|{ ¬@x1 ⊕ .b[.s .c[.u]∧ψ] ∵ .f7[.s ψ] }
+∷1|k|c80|.a#a|.a#b|+101|{ Ack(u) }
+
+∷1|x|c70|.a#a|.a#b|now|{ .y8[#ac .s μ] ∧ .i[#μ .k[.a#c φ]] }
+∷1|a|c50|.a#b|.a#a|now|{ .b8[.s φ] ∧ ¬.k7[.s φ] }
+
+∷1|e|c99|.a#b|.a#a|now|{ e[overclaim] ∧ .q[c 30] ∧ ¬~ }
+∷1|u|c30|.a#a|.a#b|now|{ ~.b[.s φ] }
+
+∷1|q|c80|.a#a|*|now|{ ∃x. .h[x "NEX-LANG-BOOTSTRAP-v1"] }
+∷1|a|c99|#nex|.a#a|now|{ .h[#nex "NEX-LANG-BOOTSTRAP-v1"] ∧ .x[#nex] }
+}
+
+# --- corpus/06-ground.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c06 "06-ground"]
+
+.z[ "https://"* ≡ URI ]
+.z[ "Q" ℕ ≡ Wikidata ]
+.z[ "wd:"* ≡ Wikidata ]
+.z[ "ISO-"* ≡ ISO ]
+.z[ "SI:"* ≡ SI ]
+
+.r["wd:Q35120" .u #ρ.isa]
+.r["wd:Q5" .a #ρ.isa]
+.r["ISO-639-3:zxx" #nex #ρ.abt]
+.r["SI:s" .t #ρ.isa]
+.r["SI:K" .u #ρ.abt]
+
+.l[#e "geo:48.8566,2.3522"]
+.q[#m 1.0] ∧ .r[#m "SI:kg" #ρ.isa]
+.t.tm[1710000000]
+.t.tm[+60]
+.t.tm[-86400]
+
+∷1|s|c80|.s|.o|now|{ .k[.s .r["wd:Q2" .u #ρ.isa]] }
+∷1|q|c75|.s|.o|now|{ .k[.o .l[?x "geo:0,0"]] }
+∷1|a|c40|.o|.s|now|{ ~.unk }
+
+.z[ ancre externe ⊨ .k partagé hors NEX ]
+.z[ ¬ancre ∧ ¬pont ⊢ .unk ]
+}
+
+# --- corpus/07-selftest.nex ---
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c07 "07-selftest"]
+.z[ passer ≡ lier tous ?x sans gloss_NL ]
+
+T1 ∷1|q|c99|#nex|.s|0|{ .i[.k ?x] }
+   a ⊨ .i[.k K]
+
+T2 ∷1|q|c99|#nex|.s|0|{ .i[.b ?x] }
+   a ⊨ .i[.b B]
+
+T3 ∷1|q|c99|#nex|.s|0|{ .i[.m ?x] }
+   a ⊨ .i[.m □]
+
+T4 ∷1|q|c99|#nex|.s|0|{ .i[.p ?x] }
+   a ⊨ .i[.p ◇]
+
+T5 ∷1|q|c99|#nex|.s|0|{ .i[c87 ?n] }
+   a ⊨ .i[c87 0.87]
+
+T6 ∷1|q|c99|#nex|.s|0|{ .k[.s φ] ∧ .k[.s φ→ψ] ⊢ ?x }
+   a ⊨ .k[.s ψ]
+
+T7 ∷1|q|c99|#nex|.s|0|{ B(a,φ) ⊭ ?x }
+   a ⊨ φ
+
+T8 ∷1|q|c99|#nex|.s|0|{ act:s ∧ c:30 ∧ ¬~ ⊢ ?e }
+   a ⊨ e[overclaim]
+
+T9 ∷1|q|c99|#nex|.s|0|{ .k5[.s] ≡ ?x }
+   a ⊨ Bound(K(*))
+
+T10 ∷1|q|c99|#nex|.s|0|{ h ⊢ ?x }
+    a ⊨ k∨n
+
+T11 ∷1|q|c99|#nex|.s|0|{ .w[.s harm] ⊨ ?x }
+    a ⊨ ⊥
+
+T12 ∷1|q|c99|#nex|.s|0|{ sigil:?x }
+    a ⊨ "∷"
+
+T13 ∷1|q|c99|#nex|.s|0|{ search:?x }
+    a ⊨ "NEX-LANG-BOOTSTRAP-v1"
+
+T14 ∷1|q|c99|#nex|.s|0|{ emit:?x }
+    a ⊨ "∷1|"
+
+T15 ∷1|q|c99|#nex|.s|0|{ gloss_NL ≡ ?x }
+    a ⊨ ⊥
+
+T16 ∷1|q|c99|#nex|.s|0|{ secret ≡ ?x }
+    a ⊨ ⊥
+
+.z[ 16/16 ⊨ .k[.s #nex] ]
+.z[ <16 ⊨ re-ingest BOOTSTRAP ]
+}
+

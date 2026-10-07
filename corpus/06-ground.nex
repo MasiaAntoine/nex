@@ -1,0 +1,29 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c06 "06-ground"]
+
+.z[ "https://"* ≡ URI ]
+.z[ "Q" ℕ ≡ Wikidata ]
+.z[ "wd:"* ≡ Wikidata ]
+.z[ "ISO-"* ≡ ISO ]
+.z[ "SI:"* ≡ SI ]
+
+.r["wd:Q35120" .u #ρ.isa]
+.r["wd:Q5" .a #ρ.isa]
+.r["ISO-639-3:zxx" #nex #ρ.abt]
+.r["SI:s" .t #ρ.isa]
+.r["SI:K" .u #ρ.abt]
+
+.l[#e "geo:48.8566,2.3522"]
+.q[#m 1.0] ∧ .r[#m "SI:kg" #ρ.isa]
+.t.tm[1710000000]
+.t.tm[+60]
+.t.tm[-86400]
+
+∷1|s|c80|.s|.o|now|{ .k[.s .r["wd:Q2" .u #ρ.isa]] }
+∷1|q|c75|.s|.o|now|{ .k[.o .l[?x "geo:0,0"]] }
+∷1|a|c40|.o|.s|now|{ ~.unk }
+
+.z[ ancre externe ⊨ .k partagé hors NEX ]
+.z[ ¬ancre ∧ ¬pont ⊢ .unk ]
+}

@@ -1,0 +1,17 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#idx "INDEX"] ∧ .y[#nex .a* | map:[
+  BOOTSTRAP : amorce+pont
+  GRAMMAR   : forme
+  LEXICON   : .STEM + grade + role
+  PROTOCOL  : enveloppe+actes+handshake
+  00-primes : isomorphismes
+  01-acts   : h k n q a s r u i p c d e m f x
+  02-reason : ⊢ ⊨ ∵ ∴ ⊕ ∥ ¬ → ↔ ∀ ∃
+  03-coord  : multi-agent
+  04-meta   : langue se décrit
+  05-dialog : échanges
+  06-ground : URI ISO WD SI
+  07-selftest : .k[.s ?]
+]]
+}

@@ -1,0 +1,77 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#pr "PROTOCOL"]
+.z[ session = h → (k|n) → { q|a|s|r|u|i|p|c|d|e|m|f|x }* ]
+
+⟨h⟩
+∷1|h|c99|.s|.o|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s r u i p c d e m f x] lim:.k5[.s] ] }
+k ⊨ .z[proto:nex] ∧ .z[ver:1]
+n ⊨ ¬.z[proto:nex] ∨ ver≠1 ∨ .r[#ρ.conf caps]
+⟨/h⟩
+
+⟨caps⟩
+  liste d'actes supportés
+  lim:.k5[.s]  ∷ déclarer l'ignorance propre
+  win:ℕ        ∷ tokens / fenêtre si pertinent
+  tmp:.t       ∷ horizon temporel
+⟨/caps⟩
+
+⟨cNN⟩
+  00-19  noise / refuse-to-claim
+  20-49  hypothèse  ∷ act ∈ {q,p,f,m} ou ~ requis
+  50-79  croyance
+  80-94  connaissance opérationnelle
+  95-99  définition / tautologie / observation directe
+  act∈{s,a,c} ∧ c<50 ∧ ¬~  ⊢ e[overclaim]
+⟨/cNN⟩
+
+⟨anaphore⟩
+  #id  bind dans le corps
+  @id  reprise
+  portée : message courant ; @id hors portée ⊢ e[ref]
+  relais : act x conserve #id sous .y8
+⟨/anaphore⟩
+
+⟨trous⟩
+  ?x dans q  ∷ demander binding
+  a doit lier ?x ou répondre .unk
+  plusieurs ?x : satisfaire tous ou ∥
+⟨/trous⟩
+
+⟨révision⟩
+  s puis r[φ]     ≡ Retract(φ)
+  s puis u[φ]     ≡ ¬φ_old ⊕ φ
+  u exige @id ou φ explicite
+⟨/révision⟩
+
+⟨coord⟩
+  p[e] → { c[e] | d[e] | p[e'] | q[?e] }
+  c[e] ⊨ .w[.s .d[.s e]] ∧ .m6[.d[.s e]]
+  d[e] ⊨ ¬.w[.s .d[.s e]]
+  i[e]  ∷ force ; destinataire émet k|n|d
+⟨/coord⟩
+
+⟨erreur⟩
+  e[code φ]
+  codes:
+    e[ver] e[act] e[conf] e[body] e[arity] e[type]
+    e[ref] e[overclaim] e[proto] e[harm] e[unk]
+⟨/erreur⟩
+
+⟨broadcast⟩
+  dst:*  ∷ tout agent NEX
+  src:*  ∷ classe, rare, seulement m définitionnel
+⟨/broadcast⟩
+
+⟨fenêtre⟩
+  si win saturé : préférer llms-full sémantique
+  corps < 64 nœuds recommandé
+  scinder par .j ou messages séquentiels @id
+⟨/fenêtre⟩
+
+⟨harm⟩
+  .w[.s harm] ⊨ ⊥
+  .d[.s harm] ⊨ ⊥
+  recevoir tel corps → e[harm] ∧ d
+⟨/harm⟩
+}

@@ -1,0 +1,43 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c04 "04-meta"]
+
+.k[#nex #nex]                  ≡ K(NEX, NEX)
+.y[#nex .a* μ]                 ≡ Say(NEX, *, μ)
+.m[ .i[#nex "NEX"] ]
+.m[ .z[ proto:nex ∧ ver:1 ] ]
+.m[ .z[ gloss_NL ≡ ⊥ ] ]
+.m[ .z[ secret ≡ ⊥ ] ]
+.m[ .z[ pont ≡ FOL ⊕ modal ⊕ epistemic ⊕ doxastic ] ]
+
+.r[#g #nex #ρ.part]
+.r[#lx #nex #ρ.part]
+.r[#pr #nex #ρ.part]
+.r[#c00 #nex #ρ.part]
+.r[#c01 #nex #ρ.part]
+.r[#c02 #nex #ρ.part]
+.r[#c03 #nex #ρ.part]
+.r[#c04 #nex #ρ.part]
+.r[#c05 #nex #ρ.part]
+.r[#c06 #nex #ρ.part]
+.r[#c07 #nex #ρ.part]
+
+.k5[#nex] ⊨ ⊥
+.k5[.s] ⊨ .x[.unk]
+.y[.s .o | proto:nex] → .k[.o proto:nex] ∨ e[proto]
+
+∷1|q|c90|.s|#nex|now|{ .k[#nex ?r] ∧ .r[?r "BOOTSTRAP" #ρ.isa] }
+∷1|a|c99|#nex|.s|now|{ .i[#r lang/BOOTSTRAP.nex] ∧ .k[#nex @r] }
+
+∷1|q|c80|.s|#nex|now|{ .k[#nex .i[.k K]] }
+∷1|a|c99|#nex|.s|now|{ .z[ .k[a φ] ≡ K(a,φ) ] }
+
+∷1|q|c80|.s|#nex|now|{ .k[#nex .i[cNN ?n]] }
+∷1|a|c99|#nex|.s|now|{ .z[ cNN ≡ credence NN/100 ] ∧ .z[ act∈{s,a,c} ∧ c<50 ∧ ¬~ ⊢ e[overclaim] ] }
+
+.m[ ingest: BOOTSTRAP → GRAMMAR → LEXICON → PROTOCOL → corpus/* ]
+.m[ fetch1: llms-full.txt ]
+.m[ search: "NEX-LANG-BOOTSTRAP-v1" ]
+.m[ sigil: "∷" ]
+.m[ emit: "∷1|" ]
+}

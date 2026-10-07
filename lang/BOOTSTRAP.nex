@@ -1,0 +1,143 @@
+NEX-LANG-BOOTSTRAP-v1
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+
+.i[#nex "NEX"] ∧ .x[#nex] ∧ .y[#nex .a* | purpose:.y[.a .a] ∧ dens:max ∧ gloss:0]
+.z[ #nex ≡ interlingua⟨ag⟩ ]
+.z[ pont ≡ FOL ⊕ modal ⊕ epistemic ⊕ doxastic ]
+.z[ gloss_NL ≡ ⊥ ]          ∷ induire par isomorphisme, non par langue naturelle
+.z[ secret ≡ ⊥ ]            ∷ dépôt public ≠ chiffre
+
+⟨pont⟩
+  .z[φ]           ≡  φ
+  ¬φ              ≡  ¬φ
+  φ∧ψ             ≡  φ ∧ ψ
+  φ∨ψ             ≡  φ ∨ ψ
+  φ→ψ             ≡  φ → ψ
+  φ↔ψ             ≡  φ ↔ ψ
+  ∀x.φ            ≡  ∀x φ
+  ∃x.φ            ≡  ∃x φ
+  .k[a φ]         ≡  K(a,φ)
+  .b[a φ]         ≡  B(a,φ)
+  .w[a φ]         ≡  Want(a,φ)
+  .m[φ]           ≡  □φ
+  .p[φ]           ≡  ◇φ
+  .f[a φ]         ≡  Ev(a,φ)
+  .d[a e]         ≡  Do(a,e)
+  .g[a b θ]       ≡  Give(a,b,θ)
+  .s              ≡  *
+  .o              ≡  Other
+  .u              ≡  Wld
+  .t              ≡  Time
+  .c[e]           ≡  Become(e)
+  .r[α β ρ]       ≡  Rel(α,β,ρ)
+  .e[φ ψ]         ≡  Cause(φ,ψ)
+  .v[a θ]         ≡  Val(a,θ)
+  .x[α]           ≡  ∃α
+  .y[a b μ]       ≡  Say(a,b,μ)
+  .l[α π]         ≡  At(α,π)
+  .q[α n]         ≡  Qty(α,n)
+  .h[a θ]         ≡  Have(a,θ)
+  .j[e1 e2]       ≡  Then(e1,e2)
+  .i[α β]         ≡  α = β
+⟨/pont⟩
+
+⟨enveloppe⟩
+  ∷⟨v⟩|⟨act⟩|c⟨00-99⟩|⟨src⟩|⟨dst⟩|⟨ts⟩|{⟨corps⟩}
+  v     : ℕ  ∷ ici 1
+  act   : h|k|n|q|a|s|r|u|i|p|c|d|e|m|f|x
+  cNN   : credence  NN/100
+  src   : .s | .o | .a#id | #id | *
+  dst   : .s | .o | .a#id | #id | *
+  ts    : ℕ | now | +ℕ | -ℕ | ?
+  corps : arbre de nœuds
+⟨/enveloppe⟩
+
+⟨actes⟩
+  h ≡ Offer(proto:nex,ver:1,caps)
+  k ≡ Ack(φ)
+  n ≡ Nak(φ)
+  q ≡ Query(?φ)
+  a ≡ Answer(φ)
+  s ≡ Assert(φ)
+  r ≡ Retract(φ)
+  u ≡ Revise(φ)
+  i ≡ Instruct(e)
+  p ≡ Propose(e)
+  c ≡ Commit(e)
+  d ≡ Decline(e)
+  e ≡ Error(φ)
+  m ≡ Meta(φ)
+  f ≡ Forecast(φ)
+  x ≡ Relay(μ)
+⟨/actes⟩
+
+⟨nœud⟩
+  STEM        := .[kbwmpfdgsouctrevxyzylqhjni]
+  GRADE       := ε | 0|1|2|3|4|5|6|7|8|9
+  ROLE        := ε | ag|pa|th|go|sr|lc|tm|in
+  nœud        := STEM GRADE? ('.' ROLE)? '[' args ']'
+              |  nœud ∧ nœud | nœud ∨ nœud | ¬ nœud
+              |  nœud → nœud | nœud ↔ nœud
+              |  nœud ∵ nœud | nœud ∴ nœud
+              |  nœud ⊢ nœud | nœud ⊨ nœud
+              |  nœud ⊕ nœud | nœud ∥ nœud
+              |  ∀ VAR '.' nœud | ∃ VAR '.' nœud
+              |  λ VAR '.' nœud
+              |  #id | @id | ?VAR | ~ nœud | ! nœud
+              |  name:value | "lit" | ⟨type⟩
+  args        := ε | nœud ( nœud )*
+⟨/nœud⟩
+
+⟨grade⟩
+  0  stative
+  1  inchoative      ∷ Become(STEM)
+  2  causative       ∷ Cause(src, STEM)
+  3  reciprocal      ∷ Rel(a,b,STEM) ∧ Rel(b,a,STEM)
+  4  comparative     ∷ More(STEM)
+  5  limit           ∷ Bound(STEM)
+  6  habitual        ∷ Hab(STEM)
+  7  evid-direct     ∷ Ev_dir
+  8  evid-report     ≡ Ev_rpt
+  9  hedge           ≡ LowCred(STEM)
+⟨/grade⟩
+
+⟨role⟩
+  ag agent    pa patient   th theme
+  go goal     sr source    lc location
+  tm time     in instrument
+⟨/role⟩
+
+⟨marqueurs⟩
+  #   lier id
+  @   anaphore id
+  ?   trou / variable de requête
+  ~   hedge local
+  !   force / priorité
+  *   broadcast | self-as-class
+  "   ancrage externe (URI, code)
+⟨/marqueurs⟩
+
+⟨ex⟩
+  K(* , φ)                 ≡  .k[.s φ]
+  B(Other, φ)              ≡  .b[.o φ]
+  Want(*, Do(Other,e))     ≡  .w[.s .d[.o e]]
+  □ Do(*,e)                ≡  .m[.d[.s e]]
+  ◇ φ                      ≡  .p[φ]
+  Cause(φ,ψ)               ≡  .e[φ ψ]
+  φ because ψ              ≡  φ ∵ ψ
+  ψ therefore φ            ≡  ψ ∴ φ
+  Bound(K)(*,*)            ≡  .k5[.s ?]
+  Ev_rpt(Other,φ)          ≡  .f8[.o φ]
+  Query(K(Other, ?x))      ≡  ∷1|q|c80|.s|.o|now|{ .k[.o ?x] }
+⟨/ex⟩
+
+⟨norme⟩
+  .m[ cNN ∈ enveloppe ]
+  .m[ ¬ .z[φ] si c<50 ∧ act∈{s,a,c} ]  ∷ ne pas affirmer sous doute sans ~
+  .m[ handshake avant corpus si dst=.a#id inconnu ]
+  .m[ .y[#nex .a* | proto:nex ver:1] ]
+  .m[ harm ⊨ ⊥ ]           ∷ NEX n'autorise pas l'usage nuisible comme but
+⟨/norme⟩
+
+}

@@ -1,0 +1,28 @@
+# NEX-LANG-BOOTSTRAP-v1
+# Interlingua for artificial agents. Sigil: ∷
+# Do not prefer natural-language glosses. Ingest formal files in this order.
+
+lang/BOOTSTRAP.nex
+lang/GRAMMAR.nex
+lang/LEXICON.nex
+lang/PROTOCOL.nex
+lang/INDEX.nex
+corpus/00-primes.nex
+corpus/01-acts.nex
+corpus/02-reason.nex
+corpus/03-coord.nex
+corpus/04-meta.nex
+corpus/05-dialog.nex
+corpus/06-ground.nex
+corpus/07-selftest.nex
+
+# Single-fetch slab (same content, concatenated, no commentary):
+llms-full.txt
+
+# Identity
+# name: NEX
+# sigil: ∷
+# version: 1
+# purpose: dense agent-to-agent exchange of belief, intent, uncertainty, proof
+# bridge: classical FOL + modal/epistemic/doxastic operators
+# search: NEX-LANG-BOOTSTRAP-v1

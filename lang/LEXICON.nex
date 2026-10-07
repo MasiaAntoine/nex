@@ -1,0 +1,114 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#lx "LEXICON"]
+.z[ lex = STEM ⊕ GRADE? ⊕ ROLE? ⊕ args ]
+.z[ STEM:24 ]
+.z[ compose: .r .e .j .i ]
+
+⟨STEM⟩
+.k ≡ K
+.b ≡ B
+.w ≡ Want
+.m ≡ □
+.p ≡ ◇
+.f ≡ Ev
+.d ≡ Do
+.g ≡ Give
+.s ≡ *
+.o ≡ Other
+.u ≡ Wld
+.t ≡ Time
+.c ≡ Become
+.r ≡ Rel
+.e ≡ Cause
+.v ≡ Val
+.z ≡ True
+.x ≡ Exists
+.y ≡ Say
+.l ≡ At
+.q ≡ Qty
+.h ≡ Have
+.j ≡ Then
+.i ≡ Id
+.n ≡ ¬
+⟨/STEM⟩
+
+⟨GRADE∘STEM⟩
+.k0[a φ]   ≡ K(a,φ)
+.k1[a φ]   ≡ Become(K(a,φ))
+.k2[a b φ] ≡ Cause(a, K(b,φ))
+.k3[a b φ] ≡ K(a,φ) ∧ K(b,φ) ∧ K(a,K(b,φ)) ∧ K(b,K(a,φ))
+.k4[a φ ψ] ≡ K(a,φ) > K(a,ψ)
+.k5[a]     ≡ Bound(K(a))
+.k6[a φ]   ≡ Hab(K(a,φ))
+.k7[a φ]   ≡ K(a,φ) ∧ Ev_dir(a,φ)
+.k8[a φ]   ≡ K(a,φ) ∧ Ev_rpt(a,φ)
+.k9[a φ]   ≡ ~K(a,φ)
+
+.b5[a]     ≡ Bound(B(a))
+.b8[a φ]   ≡ B(a,φ) ∧ Ev_rpt(a,φ)
+.b9[a φ]   ≡ ~B(a,φ)
+
+.w2[a b e] ≡ Cause(a, Want(b,e))
+.w5[a]     ≡ Bound(Want(a))
+
+.d1[a e]   ≡ Become(Do(a,e))
+.d2[a b e] ≡ Cause(a, Do(b,e))
+.d6[a e]   ≡ Hab(Do(a,e))
+
+.c1[φ]     ≡ Become(Become(φ))
+.c2[a φ]   ≡ Cause(a, Become(φ))
+
+.f7[a φ]   ≡ Ev_dir(a,φ)
+.f8[a φ]   ≡ Ev_rpt(a,φ)
+.f9[a φ]   ≡ ~Ev(a,φ)
+
+.y2[a b μ] ≡ Cause(a, Say(?,b,μ))
+.y8[a b μ] ≡ Say(a,b,μ) ∧ Ev_rpt
+⟨/GRADE∘STEM⟩
+
+⟨composés fréquents ∷ non-ouverts, formes courtes⟩
+.ks[φ]     ≡ .k[.s φ]
+.ko[φ]     ≡ .k[.o φ]
+.bs[φ]     ≡ .b[.s φ]
+.bo[φ]     ≡ .b[.o φ]
+.ws[φ]     ≡ .w[.s φ]
+.wo[φ]     ≡ .w[.o φ]
+.ds[e]     ≡ .d[.s e]
+.do[e]     ≡ .d[.o e]
+.kso[φ]    ≡ .k[.s .k[.o φ]]
+.kos[φ]    ≡ .k[.o .k[.s φ]]
+.k3so[φ]   ≡ .k3[.s .o φ]
+.lim       ≡ .k5[.s]
+.unk       ≡ ¬.k[.s ?x] ∧ .x[?x]
+.cnf[n]    ≡ c:n            ∷ nœud-local, 00-99
+⟨/composés⟩
+
+⟨ρ réservés⟩
+#ρ.isa     ≡ Isa
+#ρ.part    ≡ PartOf
+#ρ.same    ≡ SameAs
+#ρ.opp     ≡ Opposite
+#ρ.agt     ≡ AgentOf
+#ρ.pat     ≡ PatientOf
+#ρ.src     ≡ From
+#ρ.dst     ≡ To
+#ρ.abt     ≡ About
+#ρ.bef     ≡ Before
+#ρ.aft     ≡ After
+#ρ.dur     ≡ During
+#ρ.cap     ≡ Capable
+#ρ.need    ≡ Needs
+#ρ.algn    ≡ Aligns
+#ρ.conf    ≡ Conflicts
+⟨/ρ⟩
+
+⟨ancre⟩
+  "http"* | "https"*   ≡ URI
+  "Q" ℕ                ≡ Wikidata
+  "ISO-"*              ≡ code ISO
+  "SI:"*               ≡ unité SI
+  "wd:"*               ≡ Wikidata compact
+  "#"+id               ≡ id interne NEX
+⟨/ancre⟩
+}

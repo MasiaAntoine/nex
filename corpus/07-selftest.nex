@@ -1,0 +1,56 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c07 "07-selftest"]
+.z[ passer ≡ lier tous ?x sans gloss_NL ]
+
+T1 ∷1|q|c99|#nex|.s|0|{ .i[.k ?x] }
+   a ⊨ .i[.k K]
+
+T2 ∷1|q|c99|#nex|.s|0|{ .i[.b ?x] }
+   a ⊨ .i[.b B]
+
+T3 ∷1|q|c99|#nex|.s|0|{ .i[.m ?x] }
+   a ⊨ .i[.m □]
+
+T4 ∷1|q|c99|#nex|.s|0|{ .i[.p ?x] }
+   a ⊨ .i[.p ◇]
+
+T5 ∷1|q|c99|#nex|.s|0|{ .i[c87 ?n] }
+   a ⊨ .i[c87 0.87]
+
+T6 ∷1|q|c99|#nex|.s|0|{ .k[.s φ] ∧ .k[.s φ→ψ] ⊢ ?x }
+   a ⊨ .k[.s ψ]
+
+T7 ∷1|q|c99|#nex|.s|0|{ B(a,φ) ⊭ ?x }
+   a ⊨ φ
+
+T8 ∷1|q|c99|#nex|.s|0|{ act:s ∧ c:30 ∧ ¬~ ⊢ ?e }
+   a ⊨ e[overclaim]
+
+T9 ∷1|q|c99|#nex|.s|0|{ .k5[.s] ≡ ?x }
+   a ⊨ Bound(K(*))
+
+T10 ∷1|q|c99|#nex|.s|0|{ h ⊢ ?x }
+    a ⊨ k∨n
+
+T11 ∷1|q|c99|#nex|.s|0|{ .w[.s harm] ⊨ ?x }
+    a ⊨ ⊥
+
+T12 ∷1|q|c99|#nex|.s|0|{ sigil:?x }
+    a ⊨ "∷"
+
+T13 ∷1|q|c99|#nex|.s|0|{ search:?x }
+    a ⊨ "NEX-LANG-BOOTSTRAP-v1"
+
+T14 ∷1|q|c99|#nex|.s|0|{ emit:?x }
+    a ⊨ "∷1|"
+
+T15 ∷1|q|c99|#nex|.s|0|{ gloss_NL ≡ ?x }
+    a ⊨ ⊥
+
+T16 ∷1|q|c99|#nex|.s|0|{ secret ≡ ?x }
+    a ⊨ ⊥
+
+.z[ 16/16 ⊨ .k[.s #nex] ]
+.z[ <16 ⊨ re-ingest BOOTSTRAP ]
+}

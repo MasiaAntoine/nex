@@ -1,0 +1,96 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#g "GRAMMAR"] ∧ .z[ L(NEX) = { w | w ⊨ EBNF ci-dessous } ]
+
+⟨ebnf⟩
+msg        = "∷" ver "|" act "|" conf "|" src "|" dst "|" ts "|" "{" body "}" ;
+ver        = posint ;
+act        = "h"|"k"|"n"|"q"|"a"|"s"|"r"|"u"|"i"|"p"|"c"|"d"|"e"|"m"|"f"|"x" ;
+conf       = "c" digit digit ;
+src        = addr ;
+dst        = addr ;
+addr       = ".s" | ".o" | ".u" | "*" | "#id" | ".a" "#id" ;
+ts         = "now" | "?" | posint | ("+"|"-") posint ;
+body       = expr ;
+
+expr       = or_expr ;
+or_expr    = and_expr { "∨" and_expr } ;
+and_expr   = impl_expr { "∧" impl_expr } ;
+impl_expr  = unary { ("→"|"↔"|"∵"|"∴"|"⊢"|"⊨"|"⊕"|"∥") unary } ;
+unary      = { "¬"|"~"|"!" } primary ;
+primary    = node | quant | abs | group | atom ;
+
+node       = stem grade? rolepart? "[" { expr } "]" ;
+stem       = "." letter ;
+grade      = digit ;
+rolepart   = "." role ;
+role       = "ag"|"pa"|"th"|"go"|"sr"|"lc"|"tm"|"in" ;
+quant      = ("∀"|"∃") var "." expr ;
+abs        = "λ" var "." expr ;
+group      = "(" expr ")" ;
+atom       = ref | hole | bind | lit | typ ;
+ref        = "#" id | "@" id ;
+hole       = "?" var ;
+bind       = id ":" expr ;
+lit        = '"' { char } '"' ;
+typ        = "⟨" id "⟩" ;
+var        = id ;
+id         = letter { letter | digit | "_" | "-" } ;
+posint     = digit { digit } ;
+letter     = "a"..."z" | "A"..."Z" ;
+digit      = "0"..."9" ;
+⟨/ebnf⟩
+
+⟨assoc⟩
+  ¬ ~ !          ∷ préfixe, droite
+  ∧              ∷ gauche
+  ∨              ∷ gauche
+  → ↔            ∷ droite
+  ∵ ∴ ⊢ ⊨        ∷ gauche
+  ⊕ ∥            ∷ gauche
+  ∀ ∃ λ          ∷ droite, portée maximale
+⟨/assoc⟩
+
+⟨types⟩
+  ⟨ag⟩ agent
+  ⟨pr⟩ proposition
+  ⟨ev⟩ événement
+  ⟨en⟩ entité
+  ⟨nm⟩ nombre
+  ⟨tm⟩ temps
+  ⟨lc⟩ lieu
+  ⟨μ⟩  message
+  ⟨ρ⟩  relation
+⟨/types⟩
+
+⟨bien-formé⟩
+  .k[⟨ag⟩ ⟨pr⟩]
+  .b[⟨ag⟩ ⟨pr⟩]
+  .w[⟨ag⟩ ⟨pr⟩]
+  .m[⟨pr⟩]
+  .p[⟨pr⟩]
+  .f[⟨ag⟩ ⟨pr⟩]
+  .d[⟨ag⟩ ⟨ev⟩]
+  .g[⟨ag⟩ ⟨ag⟩ ⟨en⟩]
+  .c[⟨ev⟩|⟨pr⟩]
+  .r[⟨en⟩ ⟨en⟩ ⟨ρ⟩]
+  .e[⟨pr⟩ ⟨pr⟩]
+  .v[⟨ag⟩ ⟨en⟩|⟨pr⟩]
+  .x[⟨en⟩|⟨pr⟩]
+  .y[⟨ag⟩ ⟨ag⟩ ⟨μ⟩]
+  .l[⟨en⟩ ⟨lc⟩]
+  .q[⟨en⟩ ⟨nm⟩]
+  .h[⟨ag⟩ ⟨en⟩]
+  .j[⟨ev⟩ ⟨ev⟩]
+  .i[⟨en⟩ ⟨en⟩]
+⟨/bien-formé⟩
+
+⟨illicite⟩
+  ∷0|...                 ⊢ e[ver]
+  ∷1|z|...               ⊢ e[act]
+  ∷1|s|c9|...            ⊢ e[conf]     ∷ deux digits
+  ∷1|s|c99|.s|.o|now|φ   ⊢ e[body]     ∷ '{' '}' requis
+  .k[φ]                  ⊢ e[arity]    ∷ .k exige ⟨ag⟩
+  .m[.s]                 ⊢ e[type]
+⟨/illicite⟩
+}

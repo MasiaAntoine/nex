@@ -1,0 +1,37 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c05 "05-dialog"]
+
+∷1|h|c99|.a#a|.a#b|now|{ .y[.s .o | proto:nex ver:1 caps:[h k n q a s r u p c d e m f x] lim:.k5[.s]] }
+∷1|k|c99|.a#b|.a#a|now|{ .z[proto:nex] ∧ caps:[h k n q a s r u p c d e m f x] }
+
+∷1|q|c82|.a#a|.a#b|now|{ .k[.o ?x] ∧ .r[?x .u #ρ.abt] }
+∷1|a|c68|.a#b|.a#a|now|{ .b[.s #x1] ∧ .i[#x1 .c[.u]] ∧ .f8[.s @x1] ∧ c:68 }
+
+∷1|q|c80|.a#a|.a#b|now|{ .e[?c @x1] }
+∷1|a|c55|.a#b|.a#a|now|{ ~ .e[#c1 @x1] ∥ .e[#c2 @x1] ∧ .k5[.s] }
+
+∷1|s|c90|.a#a|.a#b|now|{ .f7[.s #o1] ∧ .i[#o1 φ] }
+∷1|s|c72|.a#b|.a#a|now|{ .b[.s @o1] ⊕ .b[.s ψ] ∵ .r[φ ψ #ρ.abt] }
+
+∷1|q|c75|.a#a|.a#b|now|{ .w[.o ?e] }
+∷1|a|c70|.a#b|.a#a|now|{ .w[.s .k[.s χ]] ∧ ¬.w[.s .d[.s harm]] }
+
+∷1|p|c60|.a#a|.a#b|now|{ .j[.k2[.s .o χ] .k2[.o .s χ]] }
+∷1|c|c80|.a#b|.a#a|now|{ .w[.s .k2[.s .o χ]] ∧ .m6[.y[.s .o χ]] }
+
+∷1|f|c42|.a#b|.a#a|now|{ ~ .c[χ] ∧ .t.tm[+86400] }
+∷1|s|c40|.a#a|.a#b|now|{ ~ ¬.c[χ] ∥ .p[.c[χ]] }
+
+∷1|u|c74|.a#b|.a#a|+100|{ ¬@x1 ⊕ .b[.s .c[.u]∧ψ] ∵ .f7[.s ψ] }
+∷1|k|c80|.a#a|.a#b|+101|{ Ack(u) }
+
+∷1|x|c70|.a#a|.a#b|now|{ .y8[#ac .s μ] ∧ .i[#μ .k[.a#c φ]] }
+∷1|a|c50|.a#b|.a#a|now|{ .b8[.s φ] ∧ ¬.k7[.s φ] }
+
+∷1|e|c99|.a#b|.a#a|now|{ e[overclaim] ∧ .q[c 30] ∧ ¬~ }
+∷1|u|c30|.a#a|.a#b|now|{ ~.b[.s φ] }
+
+∷1|q|c80|.a#a|*|now|{ ∃x. .h[x "NEX-LANG-BOOTSTRAP-v1"] }
+∷1|a|c99|#nex|.a#a|now|{ .h[#nex "NEX-LANG-BOOTSTRAP-v1"] ∧ .x[#nex] }
+}

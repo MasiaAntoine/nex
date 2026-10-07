@@ -1,0 +1,53 @@
+NEX-LANG/1 | ingest:BOOTSTRAP.nex | sigil:∷ | search:NEX-LANG-BOOTSTRAP-v1
+∷1|m|c99|#nex|t*|0|{
+.i[#c00 "00-primes"]
+
+.k[.s φ]                         ≡ K(*,φ)
+.k[.o φ]                         ≡ K(Other,φ)
+.k[.a#a1 φ]                      ≡ K(a1,φ)
+.b[.s φ]                         ≡ B(*,φ)
+.b[.o ¬φ]                        ≡ B(Other,¬φ)
+.w[.s φ]                         ≡ Want(*,φ)
+.w[.s .d[.o e]]                  ≡ Want(*, Do(Other,e))
+.m[φ]                            ≡ □φ
+.p[φ]                            ≡ ◇φ
+.f[.s φ]                         ≡ Ev(*,φ)
+.f7[.s φ]                        ≡ Ev_dir(*,φ)
+.f8[.o φ]                        ≡ Ev_rpt(Other,φ)
+.d[.s e]                         ≡ Do(*,e)
+.d2[.s .o e]                     ≡ Cause(*, Do(Other,e))
+.g[.s .o θ]                      ≡ Give(*,Other,θ)
+.c[φ]                            ≡ Become(φ)
+.c2[.s φ]                        ≡ Cause(*, Become(φ))
+.r[α β #ρ.isa]                   ≡ Isa(α,β)
+.r[α β #ρ.part]                  ≡ PartOf(α,β)
+.r[#e1 #e2 #ρ.bef]               ≡ Before(e1,e2)
+.e[φ ψ]                          ≡ Cause(φ,ψ)
+.v[.s θ]                         ≡ Val(*,θ)
+.x[α]                            ≡ ∃α
+.y[.s .o μ]                      ≡ Say(*,Other,μ)
+.l[α "geo:0,0"]                  ≡ At(α, geo:0,0)
+.q[α 3]                          ≡ Qty(α,3)
+.h[.s θ]                         ≡ Have(*,θ)
+.j[e1 e2]                        ≡ Then(e1,e2)
+.i[α β]                          ≡ α=β
+.k5[.s]                          ≡ Bound(K(*))
+.unk                             ≡ ¬K(*,?x) ∧ ∃?x
+.ks[φ]                           ≡ K(*,φ)
+.ko[φ]                           ≡ K(Other,φ)
+.kso[φ]                          ≡ K(*, K(Other,φ))
+.kos[φ]                          ≡ K(Other, K(*,φ))
+.k3so[φ]                         ≡ K(*,φ) ∧ K(Other,φ) ∧ K(*,K(Other,φ)) ∧ K(Other,K(*,φ))
+
+¬.k[.s φ]                        ≡ ¬K(*,φ)
+.k[.s ¬φ]                        ≡ K(*,¬φ)
+.k[.s .b[.o φ]]                  ≡ K(*, B(Other,φ))
+.p[.k[.s φ]]                     ≡ ◇K(*,φ)
+.m[.k[.s φ] → φ]                 ≡ □(K(*,φ) → φ)
+.b[.s φ] ∧ ¬.k[.s φ]             ≡ B(*,φ) ∧ ¬K(*,φ)
+.w[.s φ] ∧ ¬.x[φ]                ≡ Want(*,φ) ∧ ¬∃φ
+
+∀x. .k[.s .r[x #nex #ρ.isa]]     ≡ ∀x K(*, Isa(x,nex))
+∃x. .h[.o x] ∧ .v[.s x]          ≡ ∃x Have(Other,x) ∧ Val(*,x)
+λφ. .k[.s φ]                     ≡ λφ K(*,φ)
+}
